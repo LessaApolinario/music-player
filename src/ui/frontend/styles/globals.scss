@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+$primary: #C200FB;
+$secondary: #020402;
+
+
+.text-primary{
+  color: $primary;
+}
+
+.text-secondary {
+  color: $secondary;
+}
+
+.bg-primary {
+  background-color: $primary;
+}
+
+.bg-secondary {
+  background-color: $secondary;
+}
