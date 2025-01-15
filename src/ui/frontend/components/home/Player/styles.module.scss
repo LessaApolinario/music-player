@@ -1,0 +1,97 @@
+.container {
+  width: 20rem;
+  padding: 1rem;
+
+  box-shadow: 0 0 0 1px #c200fb;
+  border-radius: 20px;
+
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+
+  .cover {
+    width: 100%;
+    position: relative;
+    border-radius: 20px;
+
+    img {
+      width: 100%;
+      height: 12rem;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 9999;
+
+      width: 100%;
+      height: 100%;
+
+      transition: background-color linear 0.5s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    margin-bottom: 1rem;
+  }
+
+  .bottom {
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+
+      width: 100%;
+      margin-bottom: 1rem;
+
+      .currentTime,
+      .totalTime {
+        font-size: 1.05rem;
+      }
+
+      .progress {
+        position: relative;
+        flex: 1;
+      }
+
+      .progress,
+      .progress > div {
+        height: 4px;
+        border-radius: 6px;
+      }
+
+      .progress > div {
+        position: abolute;
+        width: 75%;
+      }
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+
+      svg {
+        font-size: 2.5rem;
+        cursor: pointer;
+
+        transition: opacity linear 0.5s;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,6 @@
-import { Outlet } from 'react-router-dom'
-
-import styles from './styles.module.scss'
 import classNames from 'classnames'
+import { Outlet } from 'react-router-dom'
+import styles from './styles.module.scss'
 
 export function DefaultLayout() {
   return (

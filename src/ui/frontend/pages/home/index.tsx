@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { Player } from '../../components/home/Player'
 import styles from './styles.module.scss'
 
 export function HomePage() {
@@ -6,7 +7,8 @@ export function HomePage() {
     <main
       className={classNames(styles.container, 'bg-secondary', 'text-primary')}
     >
-      HomePage
+      <aside className={styles.songs}>Lista de músicas</aside>
+      <Player />
     </main>
   )
 }
