@@ -12,9 +12,7 @@ export function DefaultLayout() {
       </header>
       <Outlet />
       <footer className={styles.mainFooter}>
-        <h2>Controles</h2>
-
-        <div className={styles.grid}></div>
+        <h2>Music player from 2007</h2>
       </footer>
     </div>
   )
