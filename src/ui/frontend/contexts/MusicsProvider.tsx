@@ -82,6 +82,13 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     }
   }, [currentMusic, isPlaying])
 
+  const stopMusic = useCallback(() => {
+    if (isPlaying && currentMusic?.audio) {
+      currentMusic?.audio.pause()
+      currentMusic.audio.currentTime = 0
+    }
+  }, [isPlaying, currentMusic?.audio])
+
   const goToNextMusic = useCallback(() => {
     if (musics.length === 0) {
       console.log('Lista de músicas vazia')
@@ -149,6 +156,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         addMusic,
         playMusic,
         pauseMusic,
+        stopMusic,
         goToNextMusic,
         goToPreviousMusic,
       }}

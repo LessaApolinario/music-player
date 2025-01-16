@@ -8,6 +8,7 @@ export interface MusicsProps {
   addMusic(music: File): void
   playMusic(): void
   pauseMusic(): void
+  stopMusic(): void
   goToNextMusic(): void
   goToPreviousMusic(): void
 }

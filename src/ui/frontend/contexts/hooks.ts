@@ -25,6 +25,10 @@ export function usePauseMusic() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.pauseMusic)
 }
 
+export function useStopMusic() {
+  return useContextSelector(MusicsCTX, (ctx) => ctx.stopMusic)
+}
+
 export function useGoToNextMusic() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.goToNextMusic)
 }

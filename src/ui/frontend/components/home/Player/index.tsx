@@ -4,6 +4,7 @@ import {
   FaCirclePlay,
   FaForwardStep,
 } from 'react-icons/fa6'
+import { formatTime } from '../../../../core/utils'
 import {
   useCurrentMusic,
   useGoToNextMusic,
@@ -11,17 +12,28 @@ import {
   useIsPlaying,
   usePauseMusic,
   usePlayMusic,
+  useStopMusic,
 } from '../../../contexts/hooks'
 import styles from './styles.module.scss'
-import { formatTime } from '../../../../core/utils'
 
 export function Player() {
   const currentMusic = useCurrentMusic()
   const isPlaying = useIsPlaying()
   const playMusic = usePlayMusic()
   const pauseMusic = usePauseMusic()
+  const stopMusic = useStopMusic()
   const goToNextMusic = useGoToNextMusic()
   const goToPreviousMusic = useGoToPreviousMusic()
+
+  function stopCurrentMusicAndGoToPreviousMusic() {
+    stopMusic()
+    goToPreviousMusic()
+  }
+
+  function stopCurrentMusicAndGoToNextMusic() {
+    stopMusic()
+    goToNextMusic()
+  }
 
   return (
     <div className={styles.container}>
@@ -50,13 +62,13 @@ export function Player() {
         </div>
 
         <div className={styles.controls}>
-          <FaBackwardStep onClick={goToPreviousMusic} />
+          <FaBackwardStep onClick={stopCurrentMusicAndGoToPreviousMusic} />
           {isPlaying ? (
             <FaCirclePause onClick={pauseMusic} />
           ) : (
             <FaCirclePlay onClick={playMusic} />
           )}
-          <FaForwardStep onClick={goToNextMusic} />
+          <FaForwardStep onClick={stopCurrentMusicAndGoToNextMusic} />
         </div>
       </div>
     </div>
