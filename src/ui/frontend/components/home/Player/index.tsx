@@ -5,6 +5,7 @@ import {
   FaForwardStep,
 } from 'react-icons/fa6'
 import {
+  useCurrentMusic,
   useGoToNextMusic,
   useGoToPreviousMusic,
   useIsPlaying,
@@ -12,8 +13,10 @@ import {
   usePlayMusic,
 } from '../../../contexts/hooks'
 import styles from './styles.module.scss'
+import { formatTime } from '../../../../core/utils'
 
 export function Player() {
+  const currentMusic = useCurrentMusic()
   const isPlaying = useIsPlaying()
   const playMusic = usePlayMusic()
   const pauseMusic = usePauseMusic()
@@ -32,14 +35,18 @@ export function Player() {
       </div>
 
       <div className={styles.bottom}>
-        <p>Song de Artist</p>
+        <p>{currentMusic?.title ?? ''}</p>
 
         <div className={styles.timer}>
-          <span className={styles.currentTime}>00:00</span>
+          <span className={styles.currentTime}>
+            {formatTime(currentMusic?.audio.currentTime)}
+          </span>
           <div className={styles.progress}>
             <div className='bg-primary'></div>
           </div>
-          <span className={styles.totalTime}>3:40</span>
+          <span className={styles.totalTime}>
+            {formatTime(currentMusic?.audio.duration)}
+          </span>
         </div>
 
         <div className={styles.controls}>

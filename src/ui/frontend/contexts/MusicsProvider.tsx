@@ -12,12 +12,6 @@ import { generateUUID } from '../../core/utils'
 export function MusicsProvider({ children }: PropsWithChildren) {
   const [currentMusic, setCurrentMusic] = useState<Music>()
   const [musics, setMusics] = useState<Music[]>([])
-  const [audioState, setAudioState] = useState({
-    currentTime: 0,
-    paused: true,
-    ended: false,
-    readyState: 0,
-  })
 
   useEffect(() => {
     if (!currentMusic?.audio) return
@@ -25,11 +19,10 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     const audio = currentMusic.audio
 
     const updateState = () => {
-      setAudioState({
-        currentTime: audio.currentTime,
-        paused: audio.paused,
-        ended: audio.ended,
-        readyState: audio.readyState,
+      setCurrentMusic({
+        id: currentMusic.id,
+        title: currentMusic.title,
+        audio: currentMusic.audio,
       })
     }
 
@@ -49,31 +42,34 @@ export function MusicsProvider({ children }: PropsWithChildren) {
   }, [currentMusic])
 
   const isPlaying = useMemo(() => {
-    if (!currentMusic) return false
-    return (
-      audioState.currentTime > 0 &&
-      !audioState.paused &&
-      !audioState.ended &&
-      audioState.readyState > 2
-    )
-  }, [audioState, currentMusic])
-
-  useEffect(() => {
-    console.log('isPlaying: ', isPlaying)
-  }, [isPlaying])
-
-  const addMusic = useCallback((music: File) => {
-    const musicURL = URL.createObjectURL(music)
-    const audio = new Audio(musicURL)
-
-    const newMusic: Music = {
-      id: generateUUID(),
-      title: music.name,
-      audio,
+    if (!currentMusic) {
+      return false
     }
 
-    setCurrentMusic(newMusic)
-    setMusics((previousMusics) => [newMusic, ...previousMusics])
+    return (
+      currentMusic.audio.currentTime > 0 &&
+      !currentMusic.audio.paused &&
+      !currentMusic.audio.ended &&
+      currentMusic.audio.readyState > 2
+    )
+  }, [currentMusic])
+
+  const addMusic = useCallback((music: File) => {
+    if (music) {
+      const musicURL = URL.createObjectURL(music)
+      const audio = new Audio(musicURL)
+
+      const newMusic: Music = {
+        id: generateUUID(),
+        title: music.name,
+        audio,
+      }
+
+      console.log('newMusic: ', newMusic)
+
+      setCurrentMusic(newMusic)
+      setMusics((previousMusics) => [newMusic, ...previousMusics])
+    }
   }, [])
 
   const playMusic = useCallback(() => {
