@@ -1,8 +1,10 @@
 import { createContext } from 'use-context-selector'
+import type { Music } from '../../core/typings/Music'
 
 export interface MusicsProps {
-  currentMusic: File | undefined
-  musics: File[]
+  currentMusic: Music | undefined
+  musics: Music[]
+  isPlaying: boolean
   addMusic(music: File): void
   playMusic(): void
   pauseMusic(): void

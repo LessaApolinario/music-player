@@ -9,6 +9,10 @@ export function useMusics() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.musics)
 }
 
+export function useIsPlaying() {
+  return useContextSelector(MusicsCTX, (ctx) => ctx.isPlaying)
+}
+
 export function useAddMusic() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.addMusic)
 }
