@@ -12,12 +12,35 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
 
-  .addMusic { 
     cursor: pointer;
 
-    input[type=file] {
+    .music {
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: 6px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+
+      p {
+        font-size: 1.05rem;
+        font-weight: bold;
+      }
+
+      &.current {
+        color: #020402;
+        background-color: #c200fb;
+      }
+    }
+  }
+
+  .addMusic {
+    cursor: pointer;
+
+    input[type='file'] {
       display: none;
     }
 

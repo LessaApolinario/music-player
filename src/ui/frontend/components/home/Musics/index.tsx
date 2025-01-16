@@ -1,11 +1,17 @@
 import classNames from 'classnames'
 import { type ChangeEvent } from 'react'
 import { FaPlus } from 'react-icons/fa6'
-import { useAddMusic, useMusics } from '../../../contexts/hooks'
+import { formatTime } from '../../../../core/utils'
+import {
+  useAddMusic,
+  useCurrentMusic,
+  useMusics,
+} from '../../../contexts/hooks'
 import styles from './styles.module.scss'
 
 export function Musics() {
   const musics = useMusics()
+  const currentMusic = useCurrentMusic()
   const addMusic = useAddMusic()
 
   function handleMusicChange(event: ChangeEvent<HTMLInputElement>) {
@@ -21,10 +27,17 @@ export function Musics() {
       <h2>Lista de músicas</h2>
 
       <div className={styles.musics}>
-        {musics.map((music) => {
+        {musics.map((music, index) => {
           return (
-            <div key={music.id}>
+            <div
+              className={classNames(styles.music, {
+                [styles.current]: currentMusic?.id === music.id,
+              })}
+              key={music.id}
+            >
+              <p>{index + 1}</p>
               <p>{music.title}</p>
+              <p>{formatTime(music.audio.duration)}</p>
             </div>
           )
         })}
