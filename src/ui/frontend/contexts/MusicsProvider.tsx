@@ -65,8 +65,6 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         audio,
       }
 
-      console.log('newMusic: ', newMusic)
-
       setCurrentMusic(newMusic)
       setMusics((previousMusics) => [newMusic, ...previousMusics])
     }
@@ -113,7 +111,34 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     }
   }, [currentMusic, musics])
 
-  const goToPreviousMusic = useCallback(() => {}, [])
+  const goToPreviousMusic = useCallback(() => {
+    if (musics.length === 0) {
+      console.log('Lista de músicas vazia')
+      return
+    }
+
+    if (!currentMusic) {
+      console.log('Nenhuma música tocando')
+      return
+    }
+
+    const foundCurrentMusicIndex = musics.findIndex((music) => {
+      return music.id === currentMusic.id
+    })
+    const wasCurrentIndexFound = foundCurrentMusicIndex !== -1
+
+    if (wasCurrentIndexFound) {
+      const previousMusicIndex = foundCurrentMusicIndex - 1
+      const reachedTheBeginningOfTheMusicsList = previousMusicIndex < 0
+
+      if (reachedTheBeginningOfTheMusicsList) {
+        console.log('Início da lista')
+      } else {
+        const previousMusic = musics[previousMusicIndex]
+        setCurrentMusic(previousMusic)
+      }
+    }
+  }, [currentMusic, musics])
 
   return (
     <MusicsCTX.Provider
