@@ -36,3 +36,7 @@ export function useGoToNextMusic() {
 export function useGoToPreviousMusic() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.goToPreviousMusic)
 }
+
+export function useSelectMusic() {
+  return useContextSelector(MusicsCTX, (ctx) => ctx.selectMusic)
+}

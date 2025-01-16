@@ -6,6 +6,7 @@ import {
   useAddMusic,
   useCurrentMusic,
   useMusics,
+  useSelectMusic,
 } from '../../../contexts/hooks'
 import styles from './styles.module.scss'
 
@@ -13,6 +14,7 @@ export function Musics() {
   const musics = useMusics()
   const currentMusic = useCurrentMusic()
   const addMusic = useAddMusic()
+  const selectMusic = useSelectMusic()
 
   function handleMusicChange(event: ChangeEvent<HTMLInputElement>) {
     const files = event.target.files
@@ -20,6 +22,10 @@ export function Musics() {
       const file = files[0]
       addMusic(file)
     }
+  }
+
+  function stopCurrentMusicAndSelectMusic(index: number) {
+    selectMusic(index)
   }
 
   return (
@@ -34,6 +40,7 @@ export function Musics() {
                 [styles.current]: currentMusic?.id === music.id,
               })}
               key={music.id}
+              onDoubleClick={() => stopCurrentMusicAndSelectMusic(index)}
             >
               <p>{index + 1}</p>
               <p>{music.title}</p>

@@ -147,6 +147,25 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     }
   }, [currentMusic, musics])
 
+  const selectMusic = useCallback(
+    (currentMusicIndex: number) => {
+      const wasMusicFound = currentMusicIndex !== -1
+      if (wasMusicFound) {
+        const foundMusic = musics[currentMusicIndex]
+        const isCurrentMusic = currentMusic?.id === foundMusic.id
+
+        if (isCurrentMusic) {
+          console.log('Música já selecionada')
+        } else {
+          stopMusic()
+          setCurrentMusic(foundMusic)
+          foundMusic.audio.play()
+        }
+      }
+    },
+    [musics, currentMusic?.id, stopMusic]
+  )
+
   return (
     <MusicsCTX.Provider
       value={{
@@ -159,6 +178,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         stopMusic,
         goToNextMusic,
         goToPreviousMusic,
+        selectMusic,
       }}
     >
       {children}

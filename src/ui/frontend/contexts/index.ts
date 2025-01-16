@@ -11,6 +11,7 @@ export interface MusicsProps {
   stopMusic(): void
   goToNextMusic(): void
   goToPreviousMusic(): void
+  selectMusic(currentMusicIndex: number): void
 }
 
 export const MusicsCTX = createContext({} as MusicsProps)
