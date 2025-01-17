@@ -1,7 +1,5 @@
 .container {
-  main {
-    height: calc(100vh - 215.2px);
-  }
+  min-height: 100vh;
 
   .mainHeader {
     display: block;
@@ -9,16 +7,6 @@
     border-bottom: 1px solid #c200fb;
 
     h1 {
-      font-size: 1.24rem;
-    }
-  }
-
-  .mainFooter {
-    padding: 1.5rem;
-    min-height: 8rem;
-    border-top: 1px solid #c200fb;
-
-    h2 {
       font-size: 1.24rem;
     }
   }

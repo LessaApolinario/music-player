@@ -3,4 +3,6 @@
   place-items: center;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
+
+  height: calc(100vh - 87.2px);
 }

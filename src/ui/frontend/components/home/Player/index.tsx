@@ -18,6 +18,7 @@ import {
   useStopMusic,
 } from '../../../contexts/hooks'
 import styles from './styles.module.scss'
+import classNames from 'classnames'
 
 export function Player() {
   const currentMusic = useCurrentMusic()
@@ -56,7 +57,7 @@ export function Player() {
           <span className={styles.currentTime}>
             {formatTime(currentMusic?.audio.currentTime)}
           </span>
-          <div className={styles.progress}>
+          <div className={classNames('bg-tertiary', styles.progress)}>
             <div
               className='bg-primary'
               style={{

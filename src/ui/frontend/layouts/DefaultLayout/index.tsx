@@ -11,9 +11,6 @@ export function DefaultLayout() {
         <h1>Music player from 2007</h1>
       </header>
       <Outlet />
-      <footer className={styles.mainFooter}>
-        <h2>Music player from 2007</h2>
-      </footer>
     </div>
   )
 }

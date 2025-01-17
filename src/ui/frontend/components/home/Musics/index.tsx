@@ -32,23 +32,34 @@ export function Musics() {
     <aside className={styles.container}>
       <h2>Lista de músicas</h2>
 
-      <div className={styles.musics}>
-        {musics.map((music, index) => {
-          return (
-            <div
-              className={classNames(styles.music, {
-                [styles.current]: currentMusic?.id === music.id,
-              })}
-              key={music.id}
-              onDoubleClick={() => stopCurrentMusicAndSelectMusic(index)}
-            >
-              <p>{index + 1}</p>
-              <p>{music.title}</p>
-              <p>{formatTime(music.audio.duration)}</p>
-            </div>
-          )
-        })}
-      </div>
+      <table className={styles.musics}>
+        <thead>
+          <tr>
+            <th className='text-primary bg-tertiary'>#</th>
+            <th className='text-primary bg-tertiary'>Arquivo</th>
+            <th className='text-primary bg-tertiary'>Duração</th>
+          </tr>
+        </thead>
+        <div className={styles.tbodyContainer}>
+          <tbody>
+            {musics.map((music, index) => {
+              return (
+                <tr
+                  className={classNames(styles.music, {
+                    [styles.current]: currentMusic?.id === music.id,
+                  })}
+                  key={music.id}
+                  onDoubleClick={() => stopCurrentMusicAndSelectMusic(index)}
+                >
+                  <td>{index + 1}</td>
+                  <td>{music.title}</td>
+                  <td>{formatTime(music.audio.duration)}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </div>
+      </table>
 
       <label
         htmlFor='addMusic'
