@@ -4,7 +4,10 @@ import {
   FaCirclePlay,
   FaForwardStep,
 } from 'react-icons/fa6'
-import { formatTime } from '../../../../core/utils'
+import {
+  calculateMusicTimerPercentage,
+  formatTime,
+} from '../../../../core/utils'
 import {
   useCurrentMusic,
   useGoToNextMusic,
@@ -54,7 +57,15 @@ export function Player() {
             {formatTime(currentMusic?.audio.currentTime)}
           </span>
           <div className={styles.progress}>
-            <div className='bg-primary'></div>
+            <div
+              className='bg-primary'
+              style={{
+                width: `${calculateMusicTimerPercentage(
+                  currentMusic?.audio.currentTime,
+                  currentMusic?.audio.duration
+                )}%`,
+              }}
+            ></div>
           </div>
           <span className={styles.totalTime}>
             {formatTime(currentMusic?.audio.duration)}

@@ -13,3 +13,18 @@ export function formatTime(seconds?: number) {
   const secs = Math.floor(seconds % 60)
   return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
 }
+
+export function calculateMusicTimerPercentage(
+  currentTime?: number,
+  duration?: number
+) {
+  if (duration === 0 || currentTime === 0) {
+    return 0
+  }
+
+  if (!currentTime || !duration) {
+    return 0
+  }
+
+  return (currentTime / duration) * 100
+}
