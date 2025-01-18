@@ -40,25 +40,23 @@ export function Musics() {
             <th className='text-primary bg-tertiary'>Duração</th>
           </tr>
         </thead>
-        <div className={styles.tbodyContainer}>
-          <tbody>
-            {musics.map((music, index) => {
-              return (
-                <tr
-                  className={classNames(styles.music, {
-                    [styles.current]: currentMusic?.id === music.id,
-                  })}
-                  key={music.id}
-                  onDoubleClick={() => stopCurrentMusicAndSelectMusic(index)}
-                >
-                  <td>{index + 1}</td>
-                  <td>{music.title}</td>
-                  <td>{formatTime(music.audio.duration)}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </div>
+        <tbody>
+          {musics.map((music, index) => {
+            return (
+              <tr
+                className={classNames(styles.music, {
+                  [styles.current]: currentMusic?.id === music.id,
+                })}
+                key={music.id}
+                onDoubleClick={() => stopCurrentMusicAndSelectMusic(index)}
+              >
+                <td>{index + 1}</td>
+                <td>{music.title}</td>
+                <td>{formatTime(music.audio.duration)}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
 
       <label

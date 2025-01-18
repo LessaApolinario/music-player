@@ -4,15 +4,18 @@
   border-right: 1px solid #c200fb;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  flex-direction: column;
+
+  h2 {
+    margin: 1rem 0; 
+  }
 
   .musics {
     width: 100%;
+    height: calc(100% - 7.65rem);
     padding: 0 2rem;
-    height: calc(100% - 240px);
 
     thead {
       width: 100%;
@@ -27,7 +30,7 @@
 
         th {
           width: 100%;
-          padding: 1.5rem;
+          padding: 0.8rem;
 
           font-size: 1.05rem;
           text-align: center;
@@ -35,44 +38,47 @@
       }
     }
 
-    .tbodyContainer {
+    tbody {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: calc(100% - 2.85rem);
       overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #c200fb #fff;
+      -webkit-overflow-scrolling: touch;
 
-      tbody {
-        cursor: pointer;
+      .music {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
 
-        .music {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          place-items: center;
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 6px;
+        user-select: none;
 
-          flex: 1;
+        td {
           width: 100%;
-          padding: 1.5rem;
-          border-radius: 6px;
-          user-select: none;
 
-          td {
-            width: 100%;
+          font-size: 1.05rem;
+          font-weight: bold;
+          text-align: center;
+        }
 
-            font-size: 1.05rem;
-            font-weight: bold;
-            text-align: center;
-          }
-
-          &.current {
-            color: #020402;
-            background-color: #c200fb;
-          }
+        &.current {
+          color: #020402;
+          background-color: #c200fb;
         }
       }
     }
   }
 
   .addMusic {
+    width: max-content;
+    margin: 1rem 0;
+
     cursor: pointer;
+
 
     input[type='file'] {
       display: none;
