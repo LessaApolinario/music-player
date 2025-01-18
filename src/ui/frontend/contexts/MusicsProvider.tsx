@@ -6,8 +6,8 @@ import {
   type PropsWithChildren,
 } from 'react'
 import { MusicsCTX } from '.'
-import type { Music } from '../../core/typings/Music'
-import { generateUUID } from '../../core/utils'
+import type { Music } from '../../../core/typings/Music'
+import { generateUUID } from '../../../core/utils'
 
 export function MusicsProvider({ children }: PropsWithChildren) {
   const [currentMusic, setCurrentMusic] = useState<Music>()

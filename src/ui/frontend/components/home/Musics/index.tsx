@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { type ChangeEvent } from 'react'
 import { FaPlus } from 'react-icons/fa6'
-import { formatTime } from '../../../../core/utils'
+import { formatTime } from '../../../../../core/utils'
 import {
   useAddMusic,
   useCurrentMusic,

@@ -1,5 +1,5 @@
 import { createContext } from 'use-context-selector'
-import type { Music } from '../../core/typings/Music'
+import type { Music } from '../../../core/typings/Music'
 
 export interface MusicsProps {
   currentMusic: Music | undefined
