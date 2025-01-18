@@ -1,7 +1,6 @@
-import { Outlet } from 'react-router-dom'
-
-import styles from './styles.module.scss'
 import classNames from 'classnames'
+import { Outlet } from 'react-router-dom'
+import styles from './styles.module.scss'
 
 export function DefaultLayout() {
   return (
@@ -12,11 +11,6 @@ export function DefaultLayout() {
         <h1>Music player from 2007</h1>
       </header>
       <Outlet />
-      <footer className={styles.mainFooter}>
-        <h2>Controles</h2>
-
-        <div className={styles.grid}></div>
-      </footer>
     </div>
   )
 }

@@ -4,15 +4,17 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   min-height: 100vh;
 }
 
-$primary: #C200FB;
+$primary: #c200fb;
 $secondary: #020402;
+$tertiary: #2e2f2f;
 
-
-.text-primary{
+.text-primary {
   color: $primary;
 }
 
@@ -26,4 +28,8 @@ $secondary: #020402;
 
 .bg-secondary {
   background-color: $secondary;
+}
+
+.bg-tertiary {
+  background-color: $tertiary;
 }

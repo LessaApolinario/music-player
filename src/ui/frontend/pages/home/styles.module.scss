@@ -1,3 +1,8 @@
 .container {
-  background-color: #f2f2f2;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+
+  height: calc(100vh - 5.45rem);
 }
