@@ -8,5 +8,8 @@ export default defineConfig({
     host: true,
     strictPort: true,
     port: 1987,
+    // eslint-disable-next-line
+    // @ts-ignore
+    allowedHosts: ['.ngrok-free.app'],
   },
 })
