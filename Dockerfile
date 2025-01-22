@@ -1,13 +1,13 @@
 FROM node:23-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+COPY package.json .
 
-RUN yarn
+RUN yarn install
 
 COPY . .
 
 EXPOSE 1987
 
-ENTRYPOINT ["yarn", "dev", "--", "--port=1987", "--host=0.0.0.0"]
+CMD ["yarn", "dev", "--port=1987", "--host=0.0.0.0"]
