@@ -1,7 +1,7 @@
 .container {
   height: 100%;
   width: 100%;
-  border-right: 1px solid #c200fb;
+  border-right: 1px solid #3e92cc;
 
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
       height: calc(100% - 2.85rem);
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: #c200fb #fff;
+      scrollbar-color: #3e92cc #fff;
       -webkit-overflow-scrolling: touch;
 
       .music {
@@ -67,7 +67,7 @@
 
         &.current {
           color: #020402;
-          background-color: #c200fb;
+          background-color: #3e92cc;
         }
       }
     }
@@ -80,7 +80,7 @@
     border: none;
 
     h2 {
-      color: #c200fb;
+      color: #3e92cc;
     }
 
     .musics {
@@ -90,7 +90,7 @@
         height: calc(100% - 2.85rem);
 
         .music {
-          color: #c200fb;
+          color: #3e92cc;
         }
       }
     }
@@ -103,7 +103,7 @@
     border: none;
 
     h2 {
-      color: #c200fb;
+      color: #3e92cc;
     }
 
     .musics {
@@ -113,7 +113,7 @@
         height: calc(100% - 2.85rem);
 
         .music {
-          color: #c200fb;
+          color: #3e92cc;
         }
       }
     }
