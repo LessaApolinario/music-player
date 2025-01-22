@@ -8,10 +8,12 @@ import {
 import { MusicsCTX } from '.'
 import type { Music } from '../../../core/typings/Music'
 import { generateUUID } from '../../../core/utils'
+import { useNotification } from '../hooks/useNotification'
 
 export function MusicsProvider({ children }: PropsWithChildren) {
   const [currentMusic, setCurrentMusic] = useState<Music>()
   const [musics, setMusics] = useState<Music[]>([])
+  const { notify } = useNotification()
 
   useEffect(() => {
     if (!currentMusic?.audio) return
@@ -91,12 +93,12 @@ export function MusicsProvider({ children }: PropsWithChildren) {
 
   const goToNextMusic = useCallback(() => {
     if (musics.length === 0) {
-      console.log('Lista de músicas vazia')
+      notify('Lista de músicas vazia')
       return
     }
 
     if (!currentMusic) {
-      console.log('Nenhuma música tocando')
+      notify('Nenhuma música tocando')
       return
     }
 
@@ -110,22 +112,22 @@ export function MusicsProvider({ children }: PropsWithChildren) {
       const reachedTheEndOfTheMusicsList = nextMusicIndex > musics.length - 1
 
       if (reachedTheEndOfTheMusicsList) {
-        console.log('Fim da lista')
+        notify('Fim da lista')
       } else {
         const nextMusic = musics[nextMusicIndex]
         setCurrentMusic(nextMusic)
       }
     }
-  }, [currentMusic, musics])
+  }, [currentMusic, musics, notify])
 
   const goToPreviousMusic = useCallback(() => {
     if (musics.length === 0) {
-      console.log('Lista de músicas vazia')
+      notify('Lista de músicas vazia')
       return
     }
 
     if (!currentMusic) {
-      console.log('Nenhuma música tocando')
+      notify('Nenhuma música tocando')
       return
     }
 
@@ -139,13 +141,13 @@ export function MusicsProvider({ children }: PropsWithChildren) {
       const reachedTheBeginningOfTheMusicsList = previousMusicIndex < 0
 
       if (reachedTheBeginningOfTheMusicsList) {
-        console.log('Início da lista')
+        notify('Início da lista')
       } else {
         const previousMusic = musics[previousMusicIndex]
         setCurrentMusic(previousMusic)
       }
     }
-  }, [currentMusic, musics])
+  }, [currentMusic, musics, notify])
 
   const selectMusic = useCallback(
     (currentMusicIndex: number) => {
@@ -155,7 +157,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         const isCurrentMusic = currentMusic?.id === foundMusic.id
 
         if (isCurrentMusic) {
-          console.log('Música já selecionada')
+          notify('Música já selecionada')
         } else {
           stopMusic()
           setCurrentMusic(foundMusic)
@@ -163,7 +165,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         }
       }
     },
-    [musics, currentMusic?.id, stopMusic]
+    [musics, currentMusic?.id, stopMusic, notify]
   )
 
   return (
