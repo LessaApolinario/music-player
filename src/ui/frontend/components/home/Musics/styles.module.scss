@@ -9,7 +9,7 @@
   flex-direction: column;
 
   h2 {
-    margin: 1rem 0; 
+    margin: 1rem 0;
   }
 
   .musics {
@@ -72,31 +72,50 @@
       }
     }
   }
+}
 
-  .addMusic {
-    width: max-content;
-    margin: 1rem 0;
+@media (max-width: 768px) {
+  .container {
+    height: calc(100% - 2.5rem);
+    border: none;
 
-    cursor: pointer;
-
-
-    input[type='file'] {
-      display: none;
+    h2 {
+      color: #c200fb;
     }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
+    .musics {
+      height: calc(100% - 4.65rem);
 
-    padding: 0.8rem;
-    border: 2px solid #c200fb;
-    border-radius: 6px;
+      tbody {
+        height: calc(100% - 2.85rem);
 
-    transition: opacity linear 0.8s;
+        .music {
+          color: #c200fb;
+        }
+      }
+    }
+  }
+}
 
-    &:hover {
-      opacity: 0.7;
+@media (max-width: 568px) {
+  .container {
+    height: calc(100% - 2.5rem);
+    border: none;
+
+    h2 {
+      color: #c200fb;
+    }
+
+    .musics {
+      height: calc(100% - 4.65rem);
+
+      tbody {
+        height: calc(100% - 2.85rem);
+
+        .music {
+          color: #c200fb;
+        }
+      }
     }
   }
 }
