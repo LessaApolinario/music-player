@@ -1,30 +1,28 @@
 import classNames from 'classnames'
-import { type ChangeEvent } from 'react'
-import { FaPlus } from 'react-icons/fa6'
 import { formatTime } from '../../../../../core/utils'
 import {
-  useAddMusic,
   useCurrentMusic,
   useMusics,
   useSelectMusic,
 } from '../../../contexts/hooks'
+import { AddMusic } from '../AddMusic'
 import styles from './styles.module.scss'
 
-export function Musics() {
+interface MusicsProps {
+  onClose?: () => void
+}
+
+export function Musics({ onClose }: MusicsProps) {
   const musics = useMusics()
   const currentMusic = useCurrentMusic()
-  const addMusic = useAddMusic()
+
   const selectMusic = useSelectMusic()
 
-  function handleMusicChange(event: ChangeEvent<HTMLInputElement>) {
-    const files = event.target.files
-    if (files) {
-      const file = files[0]
-      addMusic(file)
-    }
-  }
-
   function stopCurrentMusicAndSelectMusic(index: number) {
+    if (onClose) {
+      onClose()
+    }
+
     selectMusic(index)
   }
 
@@ -59,20 +57,7 @@ export function Musics() {
         </tbody>
       </table>
 
-      <label
-        htmlFor='addMusic'
-        className={classNames(styles.addMusic, 'text-primary', 'bg-secondary')}
-      >
-        Adicionar música
-        <input
-          id='addMusic'
-          type='file'
-          placeholder='Adicionar música'
-          accept='audio/mp3,audio/*;capture=microphone'
-          onChange={handleMusicChange}
-        />
-        <FaPlus />
-      </label>
+      <AddMusic />
     </aside>
   )
 }

@@ -36,7 +36,7 @@ export function DefaultLayout() {
           onClose={closeMusicsModal}
           className={classNames(styles.musicsModal, 'bg-secondary')}
         >
-          <Musics />
+          <Musics onClose={closeMusicsModal} />
         </Modal>
       )}
     </div>
