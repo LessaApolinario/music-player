@@ -40,3 +40,7 @@ export function useGoToPreviousMusic() {
 export function useSelectMusic() {
   return useContextSelector(MusicsCTX, (ctx) => ctx.selectMusic)
 }
+
+export function useAutoPlay() {
+  return useContextSelector(MusicsCTX, (ctx) => ctx.autoPlay)
+}

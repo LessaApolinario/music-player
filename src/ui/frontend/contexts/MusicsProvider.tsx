@@ -115,6 +115,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         notify('Fim da lista')
       } else {
         const nextMusic = musics[nextMusicIndex]
+        nextMusic.audio.play()
         setCurrentMusic(nextMusic)
       }
     }
@@ -144,6 +145,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         notify('Início da lista')
       } else {
         const previousMusic = musics[previousMusicIndex]
+        previousMusic.audio.play()
         setCurrentMusic(previousMusic)
       }
     }
@@ -168,6 +170,30 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     [musics, currentMusic?.id, stopMusic, notify]
   )
 
+  const autoPlay = useCallback(() => {
+    const currentMusicHasEnded =
+      currentMusic?.audio.currentTime === currentMusic?.audio.duration
+    const lastMusic = musics[musics.length - 1]
+    const reachedTheEndOfMusicsList = currentMusic?.id === lastMusic?.id
+    const hasMoreThanOneMusic = musics.length > 1
+
+    if (
+      hasMoreThanOneMusic &&
+      currentMusicHasEnded &&
+      !reachedTheEndOfMusicsList
+    ) {
+      stopMusic()
+      goToNextMusic()
+    }
+  }, [
+    musics,
+    stopMusic,
+    goToNextMusic,
+    currentMusic?.id,
+    currentMusic?.audio.currentTime,
+    currentMusic?.audio.duration,
+  ])
+
   return (
     <MusicsCTX.Provider
       value={{
@@ -181,6 +207,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         goToNextMusic,
         goToPreviousMusic,
         selectMusic,
+        autoPlay,
       }}
     >
       {children}

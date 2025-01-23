@@ -1,14 +1,20 @@
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Modal } from '../../components/base/Modal/Modal'
 import { Musics } from '../../components/home/Musics'
 import { useWindowWidth } from '../../hooks/useWindowWidth'
 import styles from './styles.module.scss'
+import { useAutoPlay } from '../../contexts/hooks'
 
 export function DefaultLayout() {
   const { isMobileScreen } = useWindowWidth()
+  const autoPlay = useAutoPlay()
   const [isMusicsModalOpen, setIsMusicsModalOpen] = useState(false)
+
+  useEffect(() => {
+    autoPlay()
+  }, [autoPlay])
 
   function openMusicsModal() {
     setIsMusicsModalOpen(true)
