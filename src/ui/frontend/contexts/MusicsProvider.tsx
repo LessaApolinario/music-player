@@ -56,22 +56,30 @@ export function MusicsProvider({ children }: PropsWithChildren) {
     )
   }, [currentMusic])
 
-  const addMusic = useCallback((music: File) => {
-    if (music) {
-      const musicURL = URL.createObjectURL(music)
-      const audio = new Audio(musicURL)
+  const addMusic = useCallback(
+    (music: File) => {
+      if (music) {
+        const musicURL = URL.createObjectURL(music)
+        const audio = new Audio(musicURL)
 
-      const newMusic: Music = {
-        id: generateUUID(),
-        title: music.name,
-        audio,
+        const newMusic: Music = {
+          id: generateUUID(),
+          title: music.name,
+          audio,
+        }
+
+        if (currentMusic) {
+          currentMusic.audio.pause()
+          currentMusic.audio.currentTime = 0
+        }
+
+        newMusic.audio.play()
+        setCurrentMusic(newMusic)
+        setMusics((previousMusics) => [newMusic, ...previousMusics])
       }
-
-      newMusic.audio.play()
-      setCurrentMusic(newMusic)
-      setMusics((previousMusics) => [newMusic, ...previousMusics])
-    }
-  }, [])
+    },
+    [currentMusic]
+  )
 
   const playMusic = useCallback(() => {
     if (!isPlaying) {
