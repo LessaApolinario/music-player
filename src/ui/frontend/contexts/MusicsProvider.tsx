@@ -157,18 +157,14 @@ export function MusicsProvider({ children }: PropsWithChildren) {
       const wasMusicFound = currentMusicIndex !== -1
       if (wasMusicFound) {
         const foundMusic = musics[currentMusicIndex]
-        const isCurrentMusic = currentMusic?.id === foundMusic.id
+        foundMusic.audio.currentTime = 0
 
-        if (isCurrentMusic) {
-          notify('Música já selecionada')
-        } else {
-          stopMusic()
-          setCurrentMusic(foundMusic)
-          foundMusic.audio.play()
-        }
+        stopMusic()
+        setCurrentMusic(foundMusic)
+        foundMusic.audio.play()
       }
     },
-    [musics, currentMusic?.id, stopMusic, notify]
+    [musics, stopMusic]
   )
 
   const autoPlay = useCallback(() => {
