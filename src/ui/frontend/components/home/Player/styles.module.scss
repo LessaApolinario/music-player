@@ -64,16 +64,46 @@
         position: relative;
         flex: 1;
         width: 100%;
-      }
-
-      .progress,
-      .progress > div {
         height: 4px;
         border-radius: 6px;
-      }
 
-      .progress > div {
-        position: abolute;
+        .progressBar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          background-color: #3e92cc;
+          pointer-events: none;
+        }
+
+        input[type='range'] {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: transparent;
+
+          appearance: none;
+          -webkit-appearance: none;
+
+          &::-webkit-slider-runnable-track {
+            height: 4px;
+            border-radius: 2px;
+            background: transparent;
+          }
+
+          &::-webkit-slider-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-top: -5.5px;
+            background: #3e92cc;
+
+            cursor: pointer;
+
+            appearance: none;
+            -webkit-appearance: none;
+          }
+        }
       }
     }
 

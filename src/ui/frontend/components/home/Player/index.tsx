@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useMemo, useRef, type FormEvent } from 'react'
 import {
   FaBackwardStep,
   FaCirclePause,
@@ -9,6 +10,7 @@ import {
   calculateMusicTimerPercentage,
   formatTime,
 } from '../../../../../core/utils'
+import playerCover from '../../../assets/img/pexels-thepaintedsquare-1010518.jpg'
 import {
   useCurrentMusic,
   useGoToNextMusic,
@@ -19,7 +21,6 @@ import {
   useStopMusic,
 } from '../../../contexts/hooks'
 import styles from './styles.module.scss'
-import playerCover from '../../../assets/img/pexels-thepaintedsquare-1010518.jpg'
 
 export function Player() {
   const currentMusic = useCurrentMusic()
@@ -29,6 +30,14 @@ export function Player() {
   const stopMusic = useStopMusic()
   const goToNextMusic = useGoToNextMusic()
   const goToPreviousMusic = useGoToPreviousMusic()
+  const progressRef = useRef<HTMLInputElement>(null)
+
+  const sliderValue = useMemo<number>(() => {
+    return calculateMusicTimerPercentage(
+      currentMusic?.audio.currentTime,
+      currentMusic?.audio.duration
+    )
+  }, [currentMusic?.audio.currentTime, currentMusic?.audio.duration])
 
   function stopCurrentMusicAndGoToPreviousMusic() {
     stopMusic()
@@ -38,6 +47,16 @@ export function Player() {
   function stopCurrentMusicAndGoToNextMusic() {
     stopMusic()
     goToNextMusic()
+  }
+
+  function handleDragMusicTimer(event: FormEvent) {
+    event.preventDefault()
+
+    if (progressRef.current && currentMusic?.audio.duration) {
+      const newTime =
+        (Number(progressRef.current.value) / 100) * currentMusic.audio.duration
+      currentMusic.audio.currentTime = newTime
+    }
   }
 
   return (
@@ -57,14 +76,18 @@ export function Player() {
           </span>
           <div className={classNames('bg-tertiary', styles.progress)}>
             <div
-              className='bg-primary'
-              style={{
-                width: `${calculateMusicTimerPercentage(
-                  currentMusic?.audio.currentTime,
-                  currentMusic?.audio.duration
-                )}%`,
-              }}
+              className={styles.progressBar}
+              style={{ width: `${sliderValue}%` }}
             ></div>
+            <input
+              ref={progressRef}
+              type='range'
+              min='0'
+              max='100'
+              step='0.1'
+              value={sliderValue || 0}
+              onInput={handleDragMusicTimer}
+            />
           </div>
           <span className={styles.totalTime}>
             {formatTime(currentMusic?.audio.duration)}
