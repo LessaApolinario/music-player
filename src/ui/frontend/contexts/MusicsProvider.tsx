@@ -67,6 +67,7 @@ export function MusicsProvider({ children }: PropsWithChildren) {
         audio,
       }
 
+      newMusic.audio.play()
       setCurrentMusic(newMusic)
       setMusics((previousMusics) => [newMusic, ...previousMusics])
     }
